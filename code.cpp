@@ -1,50 +1,135 @@
 #include <iostream>
+#include <vector> //for logo only
 #include <conio.h>
 #include <cstdlib>
 #include <ctime>
+#include <string>
+#include <chrono>
+#include <windows.h>
 
 using namespace std;
 
-int main()
+
+void PrintLogo() //this is logo print
 {
-    srand(time(0));
-    char key; // Gerakan player (w,a,s,d,x,f)
-    int n,m,i,j,minecount,ni,nj,state = 0,counter = 0; // n untuk index, m untuk tile
-    int game = 0; // counter dipakaic
-    int dif[] = {9,16,20}; // Easy, Medium, Hard
-    string difn[] = {"\033[32mEasy\033[0m","\033[33mMedium\033[0m","\033[31mHard\033[0m"}; // nama difficulty
-    int minec[] = {10,40,80}; // jumlah bom
-    string flag = "[F]", mine = "[M]";
-    // Lol me 64
-    do{
-        system("cls");
-        cout << "=== MINESWEEPER ===" << endl;// MENU
-        cout << "Choose difficulty:" << endl;
-        cout << "1. Easy(9x9 10 mines)" << endl;
-        cout << "2. Medium(16x16 40 mines)" << endl;
-        cout << "3. Hard(20x20 80 mines)" << endl;
-        cout << ">> "; cin >> n;
-    }while(n<1 || n>3);
-    n = n-1;
-    m = dif[n];
-    string tile[m][m],tilen[m][m];
-    //////////////////////
-        //PLAYSCREEN//
-    //////////////////////
-    int p[] = {0,0};
-    for(i=0;i<m;i++){
-        for(j=0;j<m;j++){
-            tile[i][j] = "[ ]";
-            tilen[i][j] = "[ ]";
+    vector <vector<string>> words ={
+        {
+            " #       # ",
+            " # #   # # ",
+            " #   #   # ",
+            " #       # ",
+            " #       # "
+        }, //  m
+        {
+            " # # # # # ",
+            "     #     ",
+            "     #     ",
+            "     #     ",
+            " # # # # # "
+        }, //  i
+        {
+            " #       # ",
+            " # #     # ",
+            " #   #   # ",
+            " #     # # ",
+            " #       # "
+        }, //  n
+        {
+            " # # # # #   ",
+            " #           ",
+            " # # # # #   ",
+            " #           ",
+            " # # # # #   "
+        }, //  e
+        {
+            " # # # # # ",
+            " #         ",
+            " # # # # # ",
+            "         # ",
+            " # # # # # "
+        }, //  s
+        {
+            " #       # ",
+            " #       # ",
+            " #   #   # ",
+            " # #   # # ",
+            " #       # "
+        }, //  w
+        {
+            " # # # # # ",
+            " #         ",
+            " # # # # # ",
+            " #         ",
+            " # # # # # "
+        }, //  e
+        {
+            " # # # # # ",
+            " #         ",
+            " # # # # # ",
+            " #         ",
+            " # # # # # "
+        }, //  e
+        {
+            " # # # # # ",
+            " #       # ",
+            " # # # # # ",
+            " #         ",
+            " #         "
+        }, //  p
+        {
+            " # # # # # ",
+            " #         ",
+            " # # # # # ",
+            " #         ",
+            " # # # # # "
+        }, //  e
+        {
+            " # # # # # ",
+            " #       # ",
+            " # # # # # ",
+            " #     #   ",
+            " #       # "
+        }, // r
+    };
+
+    // Calculate the total width of the word "MAZE"
+
+    int wordwidth = 0;
+    const int consolewidth = 40;
+    const int consoleHeight = 30;
+
+        wordwidth = words[0].size() + 1; // Add 1 space between letters
+
+        // Calculate offsets
+        int horizontaloffset = (consolewidth - wordwidth) / 2;
+        int verticaloffset = (consoleHeight -5) / 2; // 5 rows for the word
+
+        // Print blank lines for vertical centering
+
+        for (int i = 0; i < verticaloffset; ++i) {
+
+        cout << endl;
+
         }
+
+    for(int i=0;i<11;i++)
+    {
+        cout << string(horizontaloffset, ' ');
+        for(const auto &words:words)
+        {
+            cout << "\033[35m" << words[i] << "\033[0m";
+        }
+        cout << endl;
+        if(i==10)break;
     }
-    do{
-        system("cls");
-        cout << "=== MINESWEEPER ===" << endl;
+}
+
+void PrintGame(int n, int m, string tile[20][20], string difn[3], int minec[3], int p[2])
+{
         cout << "Difficulty: " << difn[n] << endl;
         cout << "Mines : " << minec[n] << endl;
-        for(i=0;i<m;i++){
-            for(j=0;j<m;j++){
+        for(int i=0;i<m;i++){
+            for(int j=0;j<m;j++){
                 if(tile[i][j] == "[F]" && !(i==p[0] && j==p[1])){
                     cout << "\033[33m" << tile[i][j] << "\033[0m" << " ";
                 }
@@ -66,6 +151,45 @@ int main()
         cout << "Uncover all the tile to win" << endl;
         cout << "Press W/A/S/D to move" << endl;
         cout << "Press X to dig" << endl;
+}
+
+int main()
+{
+    srand(time(0));
+    char key; // Gerakan player (w,a,s,d,x,f)
+    int n,m,i,j,minecount,ni,nj,state = 0,counter = 0; // n untuk index, m untuk tile
+    int game = 0; // counter dipakai
+    int dif[] = {9,16,20}; // Easy, Medium, Hard
+    string difn[] = {"\033[32mEasy\033[0m","\033[33mMedium\033[0m","\033[31mHard\033[0m"}; // nama difficulty
+    int minec[] = {10,40,80}; // jumlah bom
+    string flag = "[F]", mine = "[M]";
+        PrintLogo();
+        Sleep(10000);
+    do{
+        system("cls");
+        cout << "Choose difficulty:" << endl;
+        cout << "1. Easy(9x9 10 mines)" << endl;
+        cout << "2. Medium(16x16 40 mines)" << endl;
+        cout << "3. Hard(20x20 80 mines)" << endl;
+        cout << ">> "; cin >> n;
+    }while(n<1 || n>3);
+    n = n-1;
+    m = dif[n];
+    string tile[20][20],tilen[20][20];
+    //////////////////////
+        //PLAYSCREEN//
+    //////////////////////
+    int p[] = {0,0};
+    for(i=0;i<m;i++){
+        for(j=0;j<m;j++){
+            tile[i][j] = "[ ]";
+            tilen[i][j] = "[ ]";
+        }
+    }
+    do{
+        system("cls");
+        PrintGame(n, m, tile, difn, minec, p);
+
         cout << "Press F to place flag" << endl;
         //-------------------------------------------
         // Win Lose Checker
@@ -162,5 +286,5 @@ int main()
             state++;
         }
     }while(true);
-    return 0;
+    return 0;
 }
