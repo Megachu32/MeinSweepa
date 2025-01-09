@@ -283,6 +283,7 @@ int main()
             }
         }
         if(counter==(m*m)-minec[n]){// win when all tile uncovered
+        //gacir
             state++;
         }
     }while(true);
