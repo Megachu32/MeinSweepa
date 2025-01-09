@@ -10,11 +10,12 @@ int main()
     srand(time(0));
     char key; // Gerakan player (w,a,s,d,x,f)
     int n,m,i,j,minecount,ni,nj,state = 0,counter = 0; // n untuk index, m untuk tile
-    int game = 0; // counter dipakai
+    int game = 0; // counter dipakaic
     int dif[] = {9,16,20}; // Easy, Medium, Hard
     string difn[] = {"\033[32mEasy\033[0m","\033[33mMedium\033[0m","\033[31mHard\033[0m"}; // nama difficulty
     int minec[] = {10,40,80}; // jumlah bom
     string flag = "[F]", mine = "[M]";
+    // Lol me 64
     do{
         system("cls");
         cout << "=== MINESWEEPER ===" << endl;// MENU
