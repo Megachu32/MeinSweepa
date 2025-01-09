@@ -1,2 +1,3 @@
 # MeinSweepa
-speedrunning minesweeper proj
+speedrunning minesweeper project
+"what could go wrong?"
