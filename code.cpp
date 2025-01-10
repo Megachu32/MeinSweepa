@@ -304,13 +304,24 @@ int mesingacor()
 
     }while(gomenu==1);
 
-
-
     system("cls");
     return 0;
 
 }
 
+int PrintMenu()
+{
+            int n;
+            wordTab();
+            cout << "1. Play" << endl;
+            wordTab();
+            cout << "2. Score" << endl;
+            wordTab();
+            cout << "3. Exit" << endl;
+            wordTab();
+            cout << ">> "; cin >> n;
+    return n;
+}
 
 int main()
 {
@@ -333,14 +344,15 @@ int main()
     do { // for loop do menu pertama
         do {
             PrintLogo();
-            wordTab();
-            cout << "1. Play" << endl;
-            wordTab();
-            cout << "2. Score" << endl;
-            wordTab();
-            cout << "3. Exit" << endl;
-            wordTab();
-            cout << ">> "; cin >> n;
+            // wordTab();
+            // cout << "1. Play" << endl;
+            // wordTab();
+            // cout << "2. Score" << endl;
+            // wordTab();
+            // cout << "3. Exit" << endl;
+            // wordTab();
+            // cout << ">> "; cin >> n;
+            n = PrintMenu();
             if(n == 777){break;}
         } while ((n < 1 || n > 3));
 
