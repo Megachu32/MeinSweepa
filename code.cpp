@@ -223,7 +223,7 @@ void viewScore() // untuk print score
 }
 
 void gameTimer(int &score, int &timeGo) {
-    int timel = timeGo;
+    int timel = 0;
     while (running) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         timel++;
@@ -244,6 +244,73 @@ void wordTab()
             }
             }
 }
+
+
+int mesingacor()
+{
+    int goinp, gomenu=1;
+    int retune=0;
+    char key;
+    int g1,g2,g3;
+    do
+    {
+        key=getch();
+    system("cls");
+    cout << "mesin" << endl;
+    cout << "Q <- pull" << endl;
+    cout << "E <- back" << endl;
+
+
+
+    if (key=='q' || key== 'Q')
+    {
+        int gacha=rand()%1000;
+        g1=gacha%10;
+        g2=gacha/10%10;
+        g3=gacha/100;
+
+
+
+
+
+    }
+    else if (key=='e' || key == 'E')
+    {
+        gomenu=0;
+    }
+    else if (key =='x' || key=='X')
+    {
+      g1=7;
+      g2=7;
+      g3=7;
+    }
+
+    if (key!='e' || key!='E')
+    {
+        cout << endl << g1 << g2 << g3 << endl;
+
+        if (g1 == g2 && g2 == g3)
+        {
+            cout << "GACOR!" << endl;
+        }
+        else
+        {
+            cout << "tch" << endl;
+        }
+
+        Sleep(600);
+    }
+
+
+    }while(gomenu==1);
+
+
+
+
+    return 0;
+
+}
+
 
 int main()
 {
@@ -274,7 +341,8 @@ int main()
             cout << "3. Exit" << endl;
             wordTab();
             cout << ">> "; cin >> n;
-        } while (n < 1 || n > 3);
+            if(n == 777){break;}
+        } while ((n < 1 || n > 3));
 
         switch (n) {
             case 1: {
@@ -429,9 +497,14 @@ int main()
             case 3: {
                 break;
             }
+            case 777:{
+                srand(time(0));
+                mesingacor();
+                break;
+            }
         }
     } while (n != 3);
     running = false;
     timerThread.join();
-    return 0;
-} 
+ return 0;
+}
