@@ -306,7 +306,7 @@ int mesingacor()
 
 
 
-
+    system("cls");
     return 0;
 
 }
