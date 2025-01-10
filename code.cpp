@@ -323,6 +323,22 @@ int PrintMenu()
     return n;
 }
 
+int PrintLevel()
+{
+    int n;
+    wordTab();
+    cout << "Choose difficulty:" << endl;
+    wordTab();
+    cout << "1. Easy(9x9 10 mines)" << endl;
+    wordTab();
+    cout << "2. Medium(16x16 40 mines)" << endl;
+    wordTab();
+    cout << "3. Hard(20x20 80 mines)" << endl;
+    wordTab();
+    cout << ">> "; cin >> n;
+    return n;
+}
+
 int main()
 {
     srand(time(0));
@@ -344,14 +360,6 @@ int main()
     do { // for loop do menu pertama
         do {
             PrintLogo();
-            // wordTab();
-            // cout << "1. Play" << endl;
-            // wordTab();
-            // cout << "2. Score" << endl;
-            // wordTab();
-            // cout << "3. Exit" << endl;
-            // wordTab();
-            // cout << ">> "; cin >> n;
             n = PrintMenu();
             if(n == 777){break;}
         } while ((n < 1 || n > 3));
@@ -368,11 +376,7 @@ int main()
                 j = 0;
                 do {
                     system("cls");
-                    cout << "Choose difficulty:" << endl;
-                    cout << "1. Easy(9x9 10 mines)" << endl;
-                    cout << "2. Medium(16x16 40 mines)" << endl;
-                    cout << "3. Hard(20x20 80 mines)" << endl;
-                    cout << ">> "; cin >> n;
+                    n = PrintLevel();
                     if(n == 69){cheat = 1; cout << "CHEAT ON" << endl; while(!kbhit());}
                 } while (n < 1 || n > 3);
                 n = n - 1;
@@ -467,7 +471,7 @@ int main()
                             tile[p[0]][p[1]] = tilen[p[0]][p[1]];
                             for (i = 0; i < m; i++) {
                                 for (j = 0; j < m; j++) {
-                                    if (tilen[i][j] == mine) {
+                                    if (tilen[i][j] == mine) {  
                                         tile[i][j] = tilen[i][j];
                                     }
                                 }
