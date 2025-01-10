@@ -2,3 +2,4 @@ Kikun: 142kikun: 53
 : 50
 Vincent: 59
 helllo: 0
+Kuwon: 192
